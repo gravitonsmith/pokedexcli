@@ -1,3 +1,3 @@
-module guthub.com/spencer-alan/pokedexcli
+module github.com/gravitonsmith/pokedexcli
 
 go 1.23.4
