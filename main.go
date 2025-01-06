@@ -17,7 +17,7 @@ type config struct {
 }
 
 func main() {
-	pokeClient := pokeapi.NewClient(5 * time.Second)
+	pokeClient := pokeapi.NewClient(5*time.Second, 5*time.Minute)
 	config := &config{
 		pokeapiClient: pokeClient,
 	}
@@ -30,9 +30,13 @@ func main() {
 			continue
 		}
 		commandName := input[0]
+		args := []string{}
+		if len(input) > 1 {
+			args = input[1:]
+		}
 		command, ok := getCommands()[commandName]
 		if ok {
-			err := command.callback(config)
+			err := command.callback(config, args...)
 			if err != nil {
 				fmt.Println(err)
 			}
