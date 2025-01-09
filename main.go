@@ -12,6 +12,7 @@ import (
 
 type config struct {
 	pokeapiClient pokeapi.Client
+	pokedex       map[string]pokeapi.PokemonInfo
 	Next          *string
 	Previous      *string
 }
@@ -19,6 +20,7 @@ type config struct {
 func main() {
 	pokeClient := pokeapi.NewClient(5*time.Second, 5*time.Minute)
 	config := &config{
+		pokedex:       map[string]pokeapi.PokemonInfo{},
 		pokeapiClient: pokeClient,
 	}
 	scanner := bufio.NewScanner(os.Stdin)
