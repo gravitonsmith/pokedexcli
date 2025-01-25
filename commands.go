@@ -50,7 +50,20 @@ func getCommands() map[string]cliCommand {
 			description: "Inspect a pokemon that you have caught",
 			callback:    commandInspect,
 		},
+		"pokedex": {
+			name:        "pokedex",
+			description: "Check your pokedex!",
+			callback:    commandPokedex,
+		},
 	}
+}
+
+func commandPokedex(c *config, args ...string) error {
+	fmt.Println("Your Pokedex:")
+	for _, pokemon := range c.pokedex {
+		fmt.Printf("-%v\n", pokemon.Name)
+	}
+	return nil
 }
 
 func commandInspect(c *config, args ...string) error {
@@ -90,7 +103,7 @@ func commandCatch(c *config, args ...string) error {
 	}
 
 	fmt.Printf("Throwing a Pokeball at %s...\n", pokemonData.Name)
-	if rand.Intn(pokemonData.BaseExperience) > 50 {
+	if rand.Intn(pokemonData.BaseExperience) > 70 {
 		fmt.Printf("%v escaped...\n", pokemonData.Name)
 		return nil
 	}
